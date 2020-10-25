@@ -54,6 +54,7 @@ max_distance is 5000m).
 The purpose of this request is to get the price average of all restaurants using
 Mongodb aggregate.-
 - GET: /restaurants//average_rating
+  
 The purpose of this request is to get the rating average of each restaurant using
 Mongodb aggregate and to project only the _id, name and average_rating for each
 restaurant.
