@@ -1,0 +1,85 @@
+DATABASE PROJECT SETUP
+
+// First create admin user :
+
+	mongo
+	use admin
+
+	db.createUser(
+		{
+		  user: "admin",
+		  pwd: "admin",
+		  roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+		}
+	)
+
+// Stop mongod instance :
+
+	(quit mongo shell before) sudo systemctl stop mongod
+
+// Launch mongod instance with access control actived :
+
+	sudo chown -R $USER:$USER /var/lib/mongodb/ --> if read access errors
+	mongod --auth --port 27017 --dbpath /var/lib/mongodb
+
+// Launch mongo shell with admin credentials :
+
+	mongo --port 27017  --authenticationDatabase "admin" -u "admin" -p "admin"
+
+// Create masterclass_project database :
+
+	use masterclass_project
+
+// Create joe doe user with read/write permissions :
+
+	db.createUser(
+		{
+		  user: "joe",
+		  pwd:  "doe",   
+		  roles: [ { role: "readWrite", db: "masterclass_project" } ]
+		}
+	)
+
+// Import json to restaurants collection :
+
+	(quit mongo shell before)
+	mongoimport --db=masterclass_project --collection=restaurants --authenticationDatabase masterclass_project --username joe --password doe --file=FILE LOCATION
+
+// Launch mongo shell with joe doe credentials 
+
+	mongo --port 27017 --authenticationDatabase "masterclass_project" -u "joe" -p "doe"
+
+// Add random price between 2 and 100 to each restaurants :
+
+	db.restaurants.updateMany(
+		{ price: { $exists: false } },
+		[{ $set:
+		  { price:
+		    { $function: {
+		        body: function() { return (Math.floor(Math.random() * (100 - 2 + 1)) + 2); },
+		        args: [],
+		        lang: "js"
+		    }}
+		  }
+		}]
+	)
+
+// Add reviews array with five random reviews between 0 and 5 :
+
+	db.restaurants.updateMany(
+		{ reviews: { $exists: false } },
+		[{ $set:
+		  { reviews:
+		    { $function: {
+		        body: function() { 
+		        	const randomArray = []
+		          for(let i = 0; i<5; i++) {randomArray.push(Math.floor(Math.random() * (5 - 0 + 1)) + 0)}
+		          return randomArray; 
+		        },
+		        args: [],
+		        lang: "js"
+		    }}
+			}
+		}]
+	)
+
