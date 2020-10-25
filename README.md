@@ -5,21 +5,28 @@
 You have to create a database with the name ‘masterclass_project’, and to create a user
 (username: joe, password: doe) who has the rights to read and write inside the database
 ‘masterclass_project’, and only this user can read and write inside this db.
+
 You have to download restaurants data from this url:
 https://raw.githubusercontent.com/mongodb/docs-assets/geospatial/restaurants.json (to do
 that you can use the unix command ‘curl’ in your favorite shell: ‘curl
 https://raw.githubusercontent.com/mongodb/docs-assets/geospatial/restaurants.json --output
 restaurants.json’ , you will find all restaurants data into the file restaurants.json).
+
 Then you have to import all the content of this file (restaurants.json) inside the database
 ‘masterclass_project ‘ under the collection ‘restaurants’. Your new collection ‘restaurants’
 must have 25359 documents.
+
 You have to insert a “price <number>” field randomly between 2 and 100 among all
 documents.
+  
 You have to insert a “reviews [<number>]” field with 5 rates inside it, randomly between 0
 and 5 among all documents.
+  
 During this project, we will use geolocation feature of mongoDB on these restaurants data.
+
 You have now to create a REST API using NodeJS and ExpressJS technologies. You can
 find just below the definitions of the routes that you have to implement in this API:
+
 - GET: /restaurants/:restaurant_id
 On this route you have to get, from your database and collection, the document which
 matches with the right id. restaurant_id is a params variable (string type). It matches
