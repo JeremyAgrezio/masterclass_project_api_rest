@@ -53,15 +53,17 @@ max_distance is 5000m).
 - GET: /restaurants_price_average
 The purpose of this request is to get the price average of all restaurants using
 Mongodb aggregate.-
-- GET: /restaurants//average_rating
-  
+- GET: /restaurants//average_rating  
 The purpose of this request is to get the rating average of each restaurant using
 Mongodb aggregate and to project only the _id, name and average_rating for each
 restaurant.
+  
 Your mongoDB schema for the ‘restaurants’ collection must respect the fields of the other
 documents (i.e: name, location fields, reviews and price). Also, you have to respect the good
 types for these fields.
+
 You have to create a replica set of your database, and to send me all your commands in a
 file replica-set.conf at the root of the git.
+
 All your commands (to create db, insert, import, etc) must to be in a file commands at the
 root of your repo.
