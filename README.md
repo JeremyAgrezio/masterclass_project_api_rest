@@ -1,6 +1,6 @@
 # Projet Final MasterClass Big Data (MongoDB)
 
-## Ci-dessous les consignes du projet :
+## Consignes du projet :
 
 You have to create a database with the name ‘masterclass_project’, and to create a user
 (username: joe, password: doe) who has the rights to read and write inside the database
